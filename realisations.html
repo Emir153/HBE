@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nos Réalisations – HBE Plâtrerie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: url('https://images.unsplash.com/photo-1581093588401-ec5c44816b52?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+  background-size: cover;
+  color: var(--dark);
+  position: relative;
+}
+    h1 {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #e63946;
+      font-size: clamp(2.2rem, 5vw, 3rem);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      padding: 0 24px 60px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .grid img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      height: 220px;
+    }
+    a.back {
+      display: block;
+      text-align: center;
+      margin: 20px 0 60px;
+      color: #2a9d8f;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1rem;
+      transition: color 0.2s ease;
+    }
+    a.back:hover { color: #238071; }
+    /* Overlay sombre pour lisibilité */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(2px);
+    z-index: -1;
+  }
+</style>
+</head>
+<body>
+  <h1>Toutes nos réalisations</h1>
+  <div class="grid">
+    <img src="images/6acc6d2f-5487-4b30-b869-0d2151c28785.jpeg" alt="Plafond suspendu terminé">
+    <img src="images/8b248f7e-70ea-485b-9aa5-395c8f10cf4f.jpeg" alt="Avant travaux salon">
+    <img src="images/706d2c69-10a0-462a-964e-d11fcc9944e9.jpeg" alt="Mur parement pierre">
+    <img src="images/27420eb3-2d3f-4442-b259-69a7e420a2ae.jpeg" alt="Cuisine ouverte avant rénovation">
+    <img src="images/57204979-1138-48c7-bf31-fcb3e6171bed.jpeg" alt="Mur accent vert vif">
+    <img src="images/b9aec7de-c03b-45e8-b82d-8e94ef6dac7d.jpeg" alt="Salle de réunion rénovée">
+    <img src="images/e1ae515b-0d81-433f-9b65-8bbbabb637dc.jpeg" alt="Couloir avant rénovation">
+    <img src="images/f12e1452-c728-4e06-8223-052f44df85f1.jpeg" alt="Faux plafond dalle">
+    <img src="images/5e274d63-48f5-44f4-b89f-21a78ac4ad3e.jpeg" alt="Parement pierre living">
+    <img src="images/7d84f29d-ce63-493f-ae23-37adf1432690.jpeg" alt="Parement pierre angle">
+  </div>
+
+  <a href="index.html" class="back">⟵ Retour au site</a>
+</body>
+</html>

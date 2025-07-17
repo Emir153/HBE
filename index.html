@@ -195,9 +195,38 @@
   </section>
 
   <section id="avis">
-    <h2 data-aos="fade-up">Avis clients</h2>
-    <p style="text-align:center" data-aos="fade-in">Slider témoignages à intégrer ici (fonctionne avec JS)</p>
-  </section>
+  <h2 data-aos="fade-up">Avis clients</h2>
+  <div class="swiper" style="max-width: 900px; margin: auto; padding: 40px 0;">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Un travail propre, rapide et très professionnel. Je recommande fortement !”<br><strong>– Claire M., Fribourg</strong></blockquote>
+      </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Entreprise sérieuse et à l’écoute. Le résultat est top, merci encore !”<br><strong>– Julien R., Estavayer</strong></blockquote>
+      </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Travail minutieux, équipe ponctuelle et sympa. Rien à redire.”<br><strong>– Nathalie D., Yverdon</strong></blockquote>
+      </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Service au top du début à la fin. Très satisfait du résultat final.”<br><strong>– Marc T., Lausanne</strong></blockquote>
+      </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“De très bons conseils et une équipe passionnée. Je recommande.”<br><strong>– Isabelle L., Neuchâtel</strong></blockquote>
+      </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Ponctuels, efficaces et vraiment pros. Rien à redire.”<br><strong>– Fabrice G., Payerne</strong></blockquote>
+      </div>
+    </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Entreprise sérieuse et à l’écoute. Le résultat est top, merci encore !”<br><strong>– Julien R., Estavayer</strong></blockquote>
+      </div>
+      <div class="swiper-slide">
+        <blockquote style="font-style: italic;">“Travail minutieux, équipe ponctuelle et sympa. Rien à redire.”<br><strong>– Nathalie D., Yverdon</strong></blockquote>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
 
   <section id="contact">
     <h2 data-aos="fade-up">Contact & Devis</h2>
@@ -240,6 +269,18 @@
         autoplay: true,
         path: 'animations/paint-wall.json'
       });
+    });
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: { delay: 4000 },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      }
     });
   </script>
 </body>

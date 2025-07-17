@@ -96,7 +96,21 @@
     }
     section {
   background: linear-gradient(180deg, #ffffff 0%, #f9fbfd 100%);
-  animation: backgroundShift 10s ease infinite alternate;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(16,185,129,0.05), transparent 70%);
+  animation: floatPulse 8s ease-in-out infinite;
+  z-index: -1;
+}
 
       padding: 80px 20px;
       max-width: 1200px;
@@ -144,8 +158,11 @@
       color: var(--accent);
       font-size: 2.2rem;
     }
-  @keyframes backgroundShift {
-  0% { background-position: 0% 50%; }
+  @keyframes floatPulse {
+  0% { transform: scale(1) translate(0, 0); }
+  50% { transform: scale(1.1) translate(5px, -5px); }
+  100% { transform: scale(1) translate(0, 0); }
+}
   100% { background-position: 100% 50%; }
 }
 </style>

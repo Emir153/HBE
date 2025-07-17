@@ -1,69 +1,235 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>HBE Plâtrerie & Peinture</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HBE Plâtrerie Sàrl</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --primary: #1e293b;
-      --accent: #10b981;
-      --light: #ffffff;
-      --bg: #f0f4f8;
-      --dark: #111827;
+      --primary: #e63946;
+      --accent:  #2a9d8f;
+      --dark:    #222;
+      --light:   #fff;
     }
     * { box-sizing: border-box; scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
+      font-family: 'Roboto', sans-serif;
+      background: url('https://images.unsplash.com/photo-1581093588401-ec5c44816b52?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+      background-size: cover;
       color: var(--dark);
     }
-    .stats {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
-    }
-    .stats .grid {
+
+    header {
+      position: relative;
+      background: url('https://images.unsplash.com/photo-1523418596151-d8f87507bbf6?auto=format&fit=crop&w=1600&q=80') no-repeat center/cover;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
-      gap: 60px;
-      flex-wrap: wrap;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      color: var(--light);
     }
-    .stats .grid div {
-      flex: 1;
-      min-width: 200px;
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      z-index: 0;
     }
-    .stats .grid h3 {
-      color: var(--accent);
-      font-size: 2.2rem;
-      margin-bottom: 10px;
-    }
-    .stats .grid p {
+    header h1, header p, header .btn { position: relative; z-index: 1; }
+    header h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
       margin: 0;
+      letter-spacing: 1px;
+    }
+    header p {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      margin-top: 10px;
+    }
+    .btn {
+      margin-top: 30px;
+      padding: 14px 36px;
+      background: var(--primary);
+      color: var(--light);
+      border: none;
+      border-radius: 8px;
       font-size: 1rem;
+      cursor: pointer;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, .3);
+    }
+
+    section {
+      position: relative;
+      max-width: 1100px;
+      margin: -40px auto 100px;
+      padding: 120px 24px 80px;
+      background: var(--light);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .08);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      margin-top: 0;
+      text-align: center;
+      color: var(--primary);
+    }
+
+    .services ul {
+      list-style: none;
+      padding: 0;
+    }
+    .services li {
+      margin-bottom: 12px;
+      padding-left: 1.4em;
+      position: relative;
+      font-size: 1.05rem;
+    }
+    .services li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .gallery-grid img, .gallery-grid .more-tile {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      filter: brightness(.92);
+      transition: filter .3s, transform .3s;
+    }
+    .gallery-grid img:hover {
+      filter: brightness(1);
+      transform: scale(1.03);
+    }
+    .more-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, .05);
+      text-decoration: none;
+      font-size: 4rem;
+      color: var(--primary);
+    }
+    .more-tile:hover {
+      background: rgba(0, 0, 0, .1);
+      transform: scale(1.05);
+      filter: none;
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      margin-top: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    form button {
+      background: var(--accent);
+      color: var(--light);
+      padding: 14px 36px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: background .25s, transform .25s;
+    }
+    form button:hover {
+      background: #238071;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 28px 20px;
+      background: var(--dark);
+      color: var(--light);
+      font-size: .9rem;
     }
   </style>
 </head>
+
 <body>
-  <section class="stats">
-    <div class="grid">
-      <div>
-        <h3>150+</h3>
-        <p>Chantiers réalisés</p>
-      </div>
-      <div>
-        <h3>100%</h3>
-        <p>Clients satisfaits</p>
-      </div>
-      <div>
-        <h3>24h</h3>
-        <p>Réponse garantie</p>
-      </div>
+
+  <header>
+    <h1>HBE Plâtrerie Sàrl</h1>
+    <p>Plus de 20 ans d'expertise plâtrerie & peinture</p>
+    <a href="#contact"><button class="btn">Demandez un devis gratuit</button></a>
+  </header>
+
+  <section class="services">
+    <h2>Nos Services</h2>
+    <ul>
+      <li>Plâtrerie intérieure & extérieure</li>
+      <li>Peinture décorative et professionnelle</li>
+      <li>Isolation thermique et acoustique</li>
+      <li>Rénovations clé en main</li>
+    </ul>
+  </section>
+
+  <section class="about">
+    <h2>À propos</h2>
+    <p>Basée à Estavayer, <strong>HBE Plâtrerie Sàrl</strong> est une entreprise familiale reconnue pour son savoir-faire depuis plus de deux décennies. Nos artisans qualifiés allient techniques traditionnelles et innovations modernes pour garantir un résultat irréprochable.</p>
+    <p>Nous intervenons dans toute la Suisse romande, auprès de particuliers et de professionnels. Notre engagement : un chantier propre, des délais respectés, une communication transparente et un budget maîtrisé.</p>
+  </section>
+
+  <section class="gallery">
+    <h2>Nos Réalisations</h2>
+    <div class="gallery-grid">
+      <img src="images/img1.jpg" alt="Plafond suspendu terminé">
+      <img src="images/img2.jpg" alt="Salon avant travaux">
+      <img src="images/img3.jpg" alt="Mur en parement pierre">
+      <img src="images/img4.jpg" alt="Cuisine à rénover">
+      <a href="realisations.html" class="more-tile"><span>+</span></a>
     </div>
   </section>
+
+  <section class="contact" id="contact">
+    <h2>Contact & Devis</h2>
+    <p>Téléphone : <strong>079 345 67 41</strong><br>
+       Email : <strong>hbe.platrerie@bluewin.ch</strong></p>
+
+    <form>
+      <input type="text" name="name" placeholder="Votre nom" required>
+      <input type="email" name="email" placeholder="Votre email" required>
+      <textarea name="message" rows="5" placeholder="Votre message ou demande de devis" required></textarea>
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+
+  <footer>© 2025 HBE Plâtrerie Sàrl. Tous droits réservés.</footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        entry.target.classList.toggle('visible', entry.isIntersecting);
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
+  </script>
 </body>
 </html>

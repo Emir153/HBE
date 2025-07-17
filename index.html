@@ -49,7 +49,7 @@
   </style>
 </head>
 <body>
-  <div id="lottie-header" style="width:100%; height:400px;"></div>
+  <div id="lottie-header" style="width:100%; height:400px; background: var(--bg);"></div>
   <section class="stats">
   <div class="grid">
     <div>
@@ -111,6 +111,7 @@
       const update = () => {
         if (count < target) {
           count += step;
+          if (count > target) count = target;
           counter.innerText = count + suffix;
           setTimeout(update, 40);
         } else {
@@ -121,32 +122,35 @@
     });
   }
   animateCounters();
-  setInterval(animateCounters, 10000);
+  setInterval(() => {
+    document.querySelectorAll('.counter').forEach(c => c.innerText = '0');
+    animateCounters();
+  }, 10000);
 </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
-  <script>
-    lottie.loadAnimation({
-      container: document.getElementById('lottie-header'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'animations/paint-wall.json'
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: true,
-      autoplay: {
-        delay: 4000,
-        disableOnInteraction: false
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      }
-    });
-  </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+<script>
+  lottie.loadAnimation({
+    container: document.getElementById('lottie-header'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'animations/paint-wall.json'
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+<script>
+  const swiper = new Swiper('.swiper', {
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true
+    }
+  });
+</script>
 </body>
 </html>

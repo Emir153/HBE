@@ -1,246 +1,992 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>HBE Plâtrerie & Peinture</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NEXA — Agence Web Broye & Fribourg</title>
+  <meta name="description" content="Agence web spécialisée dans la création et refonte de sites internet pour entreprises et indépendants en Broye et Fribourg."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     :root {
-  --primary: #1e293b; /* bleu-gris foncé */
-  --accent: #10b981;  /* vert émeraude */
-  --light: #ffffff;
-  --bg: #f0f4f8;       /* gris très clair */
-  --dark: #111827;     /* presque noir */
-}
-    * { box-sizing: border-box; scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--dark);
+      --primary: #6366f1;
+      --primary-light: #818cf8;
+      --cta: #22c55e;
+      --bg: #000000;
+      --bg-2: #0a0a0f;
+      --bg-card: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --text-dim: #475569;
     }
-    header {
-      background: url('images/header-bg.avif') no-repeat center/cover;
-      color: white;
-      text-align: center;
-      padding: 140px 20px 100px;
-      position: relative;
-      overflow: hidden;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
-      z-index: 1;
-    }
-    header h1, header p, header a.btn {
-      position: relative;
-      z-index: 2;
-    }
-    header h1 {
-      font-size: 3.8rem;
-      font-weight: 800;
-      margin: 0 0 20px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
-      color: var(--accent);
-    }
-    header p {
-      font-size: 1.25rem;
-      margin-bottom: 30px;
-      color: var(--light);
-    }
-    header a.btn {
-      background: var(--accent);
-      color: white;
-      padding: 14px 36px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
-    header a.btn:hover {
-      transform: scale(1.05);
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: #000; }
+    ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+    #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+    section { position: relative; z-index: 2; }
+
+    /* NAV */
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 40px;
-      background: var(--primary);
-      color: white;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 100; width: calc(100% - 48px); max-width: 1200px;
+      background: rgba(0,0,0,0.6); backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border); border-radius: 16px;
+      padding: 14px 28px; display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.3s ease;
     }
-    nav .logo {
-      font-weight: 700;
-      font-size: 1.4rem;
+    nav.scrolled { background: rgba(0,0,0,0.88); box-shadow: 0 8px 32px rgba(99,102,241,0.15); }
+    .nav-logo {
+      font-size: 22px; font-weight: 900; letter-spacing: 4px;
+      background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    nav .nav-links {
-      display: flex;
-      gap: 24px;
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: var(--primary); color: #fff; padding: 9px 20px; border-radius: 10px;
+      font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.1);
     }
-    nav .nav-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
+    .nav-cta:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(99,102,241,0.4); }
+    .nav-mobile-btn { display: none; background: none; border: none; cursor: pointer; color: #fff; }
+
+    /* MOBILE MENU */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(0,0,0,0.97); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 32px;
     }
-    nav .nav-links a:hover {
-      color: var(--accent);
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: #fff; text-decoration: none; font-size: 28px; font-weight: 700; transition: color 0.2s; }
+    .mobile-menu a:hover { color: var(--primary-light); }
+    .mobile-menu-close { position: absolute; top: 24px; right: 24px; background: none; border: none; color: #fff; cursor: pointer; }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; }
+    .hero-glow {
+      position: absolute; top: 20%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+      animation: pulse-glow 5s ease-in-out infinite;
     }
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: auto;
+    @keyframes pulse-glow { 0%,100% { opacity: 0.5; transform: translateX(-50%) scale(1); } 50% { opacity: 1; transform: translateX(-50%) scale(1.12); } }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3);
+      padding: 6px 14px; border-radius: 100px; font-size: 13px; color: var(--primary-light);
+      font-weight: 500; margin-bottom: 28px; animation: fade-up 0.6s ease both;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cta); animation: blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero-title {
+      font-size: clamp(42px, 6vw, 82px); font-weight: 900; line-height: 1.04; letter-spacing: -2px;
+      margin-bottom: 24px; animation: fade-up 0.6s ease 0.1s both;
     }
-    .card {
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
+    .line-accent {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, #a78bfa 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    .hero-sub { font-size: clamp(16px, 2vw, 20px); color: var(--text-muted); max-width: 560px; line-height: 1.7; margin-bottom: 40px; animation: fade-up 0.6s ease 0.2s both; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; animation: fade-up 0.6s ease 0.3s both; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px; background: var(--primary); color: #fff;
+      padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.1); cursor: pointer;
     }
-    .card h3 {
-      margin-top: 15px;
-      font-size: 1.2rem;
-      color: var(--primary);
+    .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99,102,241,0.5); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); color: #fff;
+      padding: 14px 28px; border-radius: 12px; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: 1px solid var(--border); transition: all 0.2s; cursor: pointer;
     }
-    .footer {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
+    .btn-secondary:hover { background: rgba(255,255,255,0.09); transform: translateY(-2px); border-color: rgba(255,255,255,0.15); }
+    .hero-stats { display: flex; gap: 48px; margin-top: 64px; flex-wrap: wrap; animation: fade-up 0.6s ease 0.4s both; }
+    .hero-stat-num {
+      font-size: 34px; font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, #fff, var(--primary-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
-    .footer a {
-      color: var(--accent);
-      text-decoration: none;
+    .hero-stat-label { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    /* CLIENTS STRIP */
+    #clients { padding: 36px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; }
+    .clients-track { display: flex; gap: 64px; align-items: center; animation: scroll-x 28s linear infinite; white-space: nowrap; }
+    .client-name { font-size: 13px; font-weight: 600; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; transition: color 0.2s; flex-shrink: 0; }
+    .client-name:hover { color: var(--text-muted); }
+    @keyframes scroll-x { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* SECTION HEADERS */
+    .section-label { display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--primary-light); margin-bottom: 16px; }
+    .section-title { font-size: clamp(30px, 4vw, 50px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 16px; }
+    .section-sub { font-size: 17px; color: var(--text-muted); line-height: 1.7; max-width: 560px; }
+
+    /* SERVICES */
+    #services { padding: 120px 0; }
+    .services-header { margin-bottom: 64px; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 20px; }
+    .service-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px;
+      transition: all 0.3s ease; cursor: pointer; position: relative; overflow: hidden;
     }
-    .stats {
-      background: var(--primary);
-      color: white;
-      text-align: center;
-      padding: 60px 20px;
+    .service-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: 20px;
+      background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s;
     }
-    .stats .grid h3 {
-      color: var(--accent);
-      font-size: 2.2rem;
+    .service-card:hover { border-color: rgba(99,102,241,0.4); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+    .service-card:hover::before { opacity: 1; }
+    .service-card:hover .service-icon { background: var(--primary); }
+    .service-icon {
+      width: 48px; height: 48px; border-radius: 12px; background: rgba(99,102,241,0.15);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px; transition: background 0.3s;
+    }
+    .service-icon svg { width: 22px; height: 22px; color: var(--primary-light); }
+    .service-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .service-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+    .service-link { display: inline-flex; align-items: center; gap: 6px; color: var(--primary-light); font-size: 13px; font-weight: 600; margin-top: 20px; text-decoration: none; transition: gap 0.2s; }
+    .service-link:hover { gap: 10px; }
+
+    /* STATS */
+    #stats {
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.06) 0%, transparent 50%, rgba(34,197,94,0.04) 100%);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center; }
+    .stat-num {
+      font-size: clamp(36px, 4vw, 54px); font-weight: 900; letter-spacing: -2px;
+      background: linear-gradient(135deg, #fff 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .stat-label { font-size: 14px; color: var(--text-muted); margin-top: 6px; }
+
+    /* PROCESS */
+    #process { padding: 120px 0; }
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; }
+    .process-steps::before {
+      content: ''; position: absolute; top: 27px; left: 12.5%; width: 75%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent); z-index: 0;
+    }
+    .process-step { text-align: center; padding: 0 20px; position: relative; z-index: 1; }
+    .step-num {
+      width: 54px; height: 54px; border-radius: 50%; background: var(--bg-2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800;
+      color: var(--primary-light); margin: 0 auto 24px; transition: all 0.3s;
+    }
+    .process-step:hover .step-num { background: var(--primary); border-color: var(--primary); color: #fff; box-shadow: 0 0 30px rgba(99,102,241,0.5); }
+    .step-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--text-muted); line-height: 1.65; }
+
+    /* PORTFOLIO */
+    #portfolio { padding: 120px 0; }
+    .portfolio-grid { display: grid; gap: 20px; grid-template-columns: repeat(12, 1fr); }
+    .portfolio-item {
+      border-radius: 20px; overflow: hidden; background: var(--bg-card); border: 1px solid var(--border);
+      position: relative; cursor: pointer; transition: all 0.3s;
+    }
+    .portfolio-item:nth-child(1) { grid-column: span 7; }
+    .portfolio-item:nth-child(2) { grid-column: span 5; }
+    .portfolio-item:nth-child(3) { grid-column: span 5; }
+    .portfolio-item:nth-child(4) { grid-column: span 7; }
+    .portfolio-item:hover { transform: translateY(-4px); border-color: rgba(99,102,241,0.4); }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-mock { width: 100%; min-height: 240px; display: flex; align-items: center; justify-content: center; transition: transform 0.5s ease; }
+    .portfolio-item:hover .portfolio-mock { transform: scale(1.03); }
+    .portfolio-overlay {
+      position: absolute; inset: 0; background: rgba(0,0,0,0.75); display: flex;
+      align-items: flex-end; padding: 24px; opacity: 0; transition: opacity 0.3s;
+    }
+    .portfolio-info h3 { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+    .portfolio-info p { font-size: 13px; color: var(--text-muted); }
+    .portfolio-tag { display: inline-block; background: rgba(99,102,241,0.2); color: var(--primary-light); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 100px; margin-bottom: 8px; }
+
+    /* TESTIMONIALS */
+    #testimonials { padding: 120px 0; }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .testimonial-card {
+      background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; padding: 32px;
+      transition: all 0.3s;
+    }
+    .testimonial-card:hover { border-color: rgba(99,102,241,0.3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .testimonial-stars { display: flex; gap: 4px; margin-bottom: 16px; }
+    .star { width: 16px; height: 16px; color: #fbbf24; }
+    .testimonial-quote { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .author-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0;
+    }
+    .author-name { font-size: 14px; font-weight: 700; }
+    .author-role { font-size: 12px; color: var(--text-muted); }
+
+    /* PRICING */
+    #pricing { padding: 120px 0; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; align-items: start; }
+    .pricing-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 36px; transition: all 0.3s; position: relative; }
+    .pricing-card.featured {
+      background: linear-gradient(135deg, rgba(99,102,241,0.12) 0%, rgba(99,102,241,0.04) 100%);
+      border-color: rgba(99,102,241,0.5); transform: scale(1.03);
+    }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+    .pricing-badge {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--primary); color: #fff; font-size: 11px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; padding: 4px 16px; border-radius: 100px;
+    }
+    .pricing-plan { font-size: 13px; font-weight: 600; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .pricing-price { font-size: 46px; font-weight: 900; letter-spacing: -2px; margin-bottom: 4px; }
+    .pricing-price span { font-size: 20px; color: var(--text-muted); font-weight: 400; }
+    .pricing-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+    .pricing-divider { height: 1px; background: var(--border); margin: 20px 0; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .pricing-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
+    .feat-check { width: 18px; height: 18px; border-radius: 50%; background: rgba(34,197,94,0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .btn-plan { width: 100%; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 600; text-align: center; text-decoration: none; display: block; transition: all 0.2s; cursor: pointer; border: none; font-family: inherit; }
+    .btn-plan-outline { background: transparent; color: #fff; border: 1px solid var(--border); }
+    .btn-plan-outline:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+    .btn-plan-filled { background: var(--primary); color: #fff; }
+    .btn-plan-filled:hover { background: var(--primary-light); box-shadow: 0 8px 30px rgba(99,102,241,0.4); transform: translateY(-1px); }
+
+    /* CTA BANNER */
+    #cta-banner {
+      padding: 80px 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.1) 0%, rgba(129,140,248,0.04) 50%, rgba(34,197,94,0.04) 100%);
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .cta-title { font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; letter-spacing: -1px; max-width: 600px; }
+    .highlight {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* CONTACT */
+    #contact { padding: 120px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-h2 { font-size: clamp(30px, 4vw, 46px); font-weight: 800; letter-spacing: -1.5px; margin-bottom: 16px; line-height: 1.1; }
+    .contact-desc { color: var(--text-muted); font-size: 16px; line-height: 1.7; margin-bottom: 40px; }
+    .contact-detail { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .contact-icon { width: 44px; height: 44px; border-radius: 12px; background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .contact-icon svg { width: 20px; height: 20px; color: var(--primary-light); }
+    .detail-label { font-size: 12px; color: var(--text-dim); margin-bottom: 2px; }
+    .detail-value { font-size: 15px; font-weight: 500; }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+    .form-input, .form-textarea, .form-select {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: #fff;
+      padding: 12px 16px; border-radius: 10px; font-size: 15px; font-family: inherit;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-dim); }
+    .form-select option { background: #0a0a0f; }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: rgba(99,102,241,0.5); box-shadow: 0 0 0 3px rgba(99,102,241,0.1); }
+    .form-textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      background: var(--primary); color: #fff; padding: 14px 28px; border-radius: 12px;
+      font-size: 15px; font-weight: 600; border: none; cursor: pointer;
+      transition: all 0.2s; font-family: inherit; display: flex; align-items: center; gap: 8px; justify-content: center;
+    }
+    .btn-submit:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99,102,241,0.4); }
+
+    /* FOOTER */
+    footer { padding: 60px 0 32px; border-top: 1px solid var(--border); }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 48px; }
+    .footer-brand-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-top: 12px; max-width: 280px; }
+    .footer-col h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; color: var(--text-muted); }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .footer-col ul a:hover { color: #fff; }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 24px; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-dim); flex-wrap: wrap; gap: 12px; }
+
+    /* ANIMATIONS */
+    @keyframes fade-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-mobile-btn { display: block; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .portfolio-item { grid-column: span 12 !important; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-card.featured { transform: none; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+      .form-row { grid-template-columns: 1fr; }
+      .cta-inner { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .hero-stats { gap: 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 </head>
 <body>
-  <nav>
-    <div class="logo">HBE</div>
-    <div class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#why">Pourquoi nous choisir</a>
-      <a href="#gallery">Réalisations</a>
-      <a href="#avis">Avis</a>
-      <a href="#contact">Contact</a>
+<canvas id="bg-canvas" aria-hidden="true"></canvas>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu navigation">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()" aria-label="Fermer le menu">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#portfolio" onclick="closeMobileMenu()">Réalisations</a>
+  <a href="#pricing" onclick="closeMobileMenu()">Tarifs</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="navbar" role="navigation" aria-label="Navigation principale">
+  <span class="nav-logo">NEXA</span>
+  <ul class="nav-links" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Réalisations</a></li>
+    <li><a href="#process">Processus</a></li>
+    <li><a href="#pricing">Tarifs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Devis gratuit</a>
+  <button class="nav-mobile-btn" onclick="openMobileMenu()" aria-label="Ouvrir le menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero" aria-label="Présentation">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      Broye &amp; Fribourg — Suisse Romande
     </div>
-  </nav>
-  <header>
-    <h1 data-aos="fade-down">HBE Plâtrerie & Peinture</h1>
-    <p data-aos="fade-up">Votre partenaire pour des travaux de qualité en Suisse romande</p>
-    <a class="btn" href="#contact" data-aos="zoom-in">Demandez un devis</a>
-  </header>
-
-  <section id="why">
-    <h2 data-aos="fade-up">Pourquoi nous choisir</h2>
-    <div class="grid">
-      <div class="card" data-aos="fade-up" data-aos-delay="100"><h3>20+ ans d'expérience</h3><p>Expertise et savoir-faire reconnu.</p></div>
-      <div class="card" data-aos="fade-up" data-aos-delay="200"><h3>Travail soigné</h3><p>Finitions impeccables et chantier propre.</p></div>
-      <div class="card" data-aos="fade-up" data-aos-delay="300"><h3>Devis rapide</h3><p>Réponse sous 24h garantie.</p></div>
-      <div class="card" data-aos="fade-up" data-aos-delay="400"><h3>Clients satisfaits</h3><p>Une réputation fondée sur la confiance.</p></div>
+    <h1 class="hero-title">
+      Votre présence en ligne,<br/>
+      <span class="line-accent">réinventée.</span>
+    </h1>
+    <p class="hero-sub">
+      Nous créons et améliorons des sites web qui convertissent — pour les entreprises et indépendants de la région qui méritent une vitrine à la hauteur de leur ambition.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/></svg>
+        Demander un devis
+      </a>
+      <a href="#portfolio" class="btn-secondary">
+        Voir nos réalisations
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
-  </section>
-
-  <section class="stats" data-aos="fade-up">
-    <div class="grid">
-      <div><h3>150+</h3><p>Chantiers réalisés</p></div>
-      <div><h3>100%</h3><p>Clients satisfaits</p></div>
-      <div><h3>24h</h3><p>Réponse garantie</p></div>
-    </div>
-  </section>
-
-  <section id="services">
-    <h2 data-aos="fade-up">Nos services</h2>
-    <div class="grid">
-      <div class="card" data-aos="zoom-in"><h3>Plâtrerie</h3><p>Cloisons, enduits, plafonds.</p></div>
-      <div class="card" data-aos="zoom-in" data-aos-delay="100"><h3>Peinture</h3><p>Intérieur, extérieur, décoratif.</p></div>
-      <div class="card" data-aos="zoom-in" data-aos-delay="200"><h3>Isolation</h3><p>Thermique et phonique performante.</p></div>
-      <div class="card" data-aos="zoom-in" data-aos-delay="300"><h3>Rénovation</h3><p>Transformation complète ou partielle.</p></div>
-    </div>
-  </section>
-
-  <section id="gallery">
-    <h2 data-aos="fade-up">Nos réalisations</h2>
-    <p style="text-align:center" data-aos="fade-in">Galerie à venir (ou images à intégrer ici)</p>
-  </section>
-
-  <section id="avis">
-    <h2 data-aos="fade-up">Avis clients</h2>
-    <p style="text-align:center" data-aos="fade-in">Slider témoignages à intégrer ici (fonctionne avec JS)</p>
-  </section>
-
-  <section id="contact">
-    <h2 data-aos="fade-up">Contact & Devis</h2>
-    <form class="contact-form" style="max-width: 700px; margin: auto; display: flex; flex-direction: column; gap: 20px;">
-      <div style="display: flex; gap: 20px;">
-        <input placeholder="Nom complet *" required style="flex:1;" type="text"/>
-        <input placeholder="Adresse email *" required style="flex:1;" type="email"/>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num" data-target="48">0</div>
+        <div class="hero-stat-label">Sites livrés</div>
       </div>
-      <input placeholder="Téléphone" style="width:100%;" type="text"/>
-      <input placeholder="Type de projet (peinture, plâtrerie, etc.) *" required style="width:100%;" type="text"/>
-      <input placeholder="Localité du chantier *" required style="width:100%;" type="text"/>
-      <select required style="width:100%; padding: 10px; border-radius: 6px; border: 1px solid #ccc;">
-        <option value="">Travaux urgents ?</option>
-        <option value="oui">Oui</option>
-        <option value="non">Non</option>
-      </select>
-      <textarea placeholder="Détails supplémentaires (surface, type de support, etc.)" rows="4" style="width:100%;"></textarea>
-      <input style="width:100%;" type="file"/>
-      <button class="btn" style="margin-top: 10px; align-self: center; padding: 14px 30px; background: var(--accent); color: white; border-radius: 30px; font-weight: 600;" type="submit">Envoyer ma demande</button>
-    </form>
-  </section>
+      <div>
+        <div class="hero-stat-num" data-target="100">0</div>
+        <div class="hero-stat-label">% clients satisfaits</div>
+      </div>
+      <div>
+        <div class="hero-stat-num" data-target="3">0</div>
+        <div class="hero-stat-label">Ans d'expérience</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">48h</div>
+        <div class="hero-stat-label">Délai de réponse</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer class="footer">
-    <p><strong>HBE Plâtrerie & Peinture Sàrl</strong> – Estavayer</p>
-    <p><a href="mailto:hbe.platrerie@bluewin.ch">hbe.platrerie@bluewin.ch</a> | <a href="tel:+41793456741">079 345 67 41</a></p>
-    <p>© 2025 HBE. Tous droits réservés.</p>
-  </footer>
+<!-- CLIENTS STRIP -->
+<div id="clients" aria-hidden="true">
+  <div class="clients-track">
+    <span class="client-name">Boulangerie Morel</span>
+    <span class="client-name">Fiduciaire Châtel</span>
+    <span class="client-name">Garage Dupont</span>
+    <span class="client-name">Cabinet Médical Romont</span>
+    <span class="client-name">Restaurant La Broye</span>
+    <span class="client-name">Immobilier Fribourg</span>
+    <span class="client-name">Électricité Gasser</span>
+    <span class="client-name">Coiffure Éclat</span>
+    <span class="client-name">Boulangerie Morel</span>
+    <span class="client-name">Fiduciaire Châtel</span>
+    <span class="client-name">Garage Dupont</span>
+    <span class="client-name">Cabinet Médical Romont</span>
+    <span class="client-name">Restaurant La Broye</span>
+    <span class="client-name">Immobilier Fribourg</span>
+    <span class="client-name">Électricité Gasser</span>
+    <span class="client-name">Coiffure Éclat</span>
+  </div>
+</div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
-  <script>
-    AOS.init({
-      duration: 1000,
-      once: true
+<!-- SERVICES -->
+<section id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="section-label">Ce que nous faisons</span>
+      <h2 class="section-title" id="services-title">Des services pensés pour<br/>votre croissance</h2>
+      <p class="section-sub">Du site vitrine au e-commerce, nous couvrons tous vos besoins digitaux avec une approche sur mesure.</p>
+    </div>
+    <div class="services-grid">
+      <article class="service-card reveal reveal-delay-1">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3 class="service-title">Création de site web</h3>
+        <p class="service-desc">Un site moderne, rapide et optimisé pour les moteurs de recherche. Conçu pour convertir vos visiteurs en clients.</p>
+        <a href="#contact" class="service-link">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+      <article class="service-card reveal reveal-delay-2">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </div>
+        <h3 class="service-title">Refonte de site existant</h3>
+        <p class="service-desc">Votre site actuel ne reflète plus votre image ? Nous le modernisons complètement pour booster vos conversions.</p>
+        <a href="#contact" class="service-link">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+      <article class="service-card reveal reveal-delay-3">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"/></svg>
+        </div>
+        <h3 class="service-title">Boutique en ligne</h3>
+        <p class="service-desc">Vendez vos produits 24h/24. Nous créons des e-commerces performants adaptés à votre secteur d'activité.</p>
+        <a href="#contact" class="service-link">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+      <article class="service-card reveal reveal-delay-4">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        </div>
+        <h3 class="service-title">Référencement SEO</h3>
+        <p class="service-desc">Apparaissez en premier sur Google quand vos clients cherchent vos services dans la région de Broye et Fribourg.</p>
+        <a href="#contact" class="service-link">En savoir plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats" aria-label="Chiffres clés">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal">
+        <div class="stat-num" data-target="48">0</div>
+        <div class="stat-label">Projets réalisés</div>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <div class="stat-num" data-target="100">0</div>
+        <div class="stat-label">Clients satisfaits (%)</div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="stat-num">+60%</div>
+        <div class="stat-label">Trafic en moyenne</div>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <div class="stat-num">48h</div>
+        <div class="stat-label">Délai de réponse garanti</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" aria-labelledby="process-title">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:600px; margin: 0 auto 80px;">
+      <span class="section-label">Comment ça marche</span>
+      <h2 class="section-title" id="process-title">Un processus clair,<br/>de A à Z</h2>
+      <p class="section-sub" style="margin: 0 auto;">De la première discussion à la mise en ligne, vous savez exactement où vous en êtes.</p>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">01</div>
+        <h3 class="step-title">Consultation gratuite</h3>
+        <p class="step-desc">On discute de vos objectifs, de votre cible et de vos besoins spécifiques. Pas d'engagement.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">02</div>
+        <h3 class="step-title">Devis &amp; stratégie</h3>
+        <p class="step-desc">Vous recevez une proposition détaillée avec le plan de travail, les délais et les prix transparents.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">03</div>
+        <h3 class="step-title">Design &amp; développement</h3>
+        <p class="step-desc">Nous créons votre site avec des retours réguliers. Vous validez chaque étape avant la suite.</p>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-num">04</div>
+        <h3 class="step-title">Lancement &amp; suivi</h3>
+        <p class="step-desc">Mise en ligne, formation à l'utilisation et suivi pendant 3 mois inclus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" aria-labelledby="portfolio-title">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:64px;">
+      <span class="section-label">Réalisations</span>
+      <h2 class="section-title" id="portfolio-title">Des sites qui font<br/>la différence</h2>
+      <p class="section-sub">Quelques projets réalisés pour des entreprises de la région — des résultats concrets et mesurables.</p>
+    </div>
+    <div class="portfolio-grid">
+      <article class="portfolio-item reveal reveal-delay-1" tabindex="0">
+        <div class="portfolio-mock" style="background:linear-gradient(135deg,#1a0533,#2d1b69,#1a0533);min-height:260px;">
+          <div style="text-align:center;padding:32px;">
+            <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#818cf8;margin-bottom:12px;">BOULANGERIE ARTISAN</div>
+            <div style="font-size:28px;font-weight:900;letter-spacing:-1px;margin-bottom:8px;">La Farine d'Or</div>
+            <div style="font-size:13px;color:#94a3b8;">Site vitrine + Boutique en ligne</div>
+            <div style="margin-top:20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+              <div style="background:rgba(99,102,241,0.2);border:1px solid rgba(99,102,241,0.3);padding:6px 14px;border-radius:8px;font-size:12px;color:#818cf8;">+82% de commandes</div>
+              <div style="background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);padding:6px 14px;border-radius:8px;font-size:12px;color:#4ade80;">SEO 94/100</div>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-tag">E-commerce</span>
+            <h3>La Farine d'Or</h3>
+            <p>Boulangerie artisanale — Estavayer-le-Lac</p>
+          </div>
+        </div>
+      </article>
+      <article class="portfolio-item reveal reveal-delay-2" tabindex="0">
+        <div class="portfolio-mock" style="background:linear-gradient(135deg,#001a2c,#003354,#001a2c);min-height:260px;">
+          <div style="text-align:center;padding:32px;">
+            <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#38bdf8;margin-bottom:12px;">CABINET MÉDICAL</div>
+            <div style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Dr. Blanc &amp; Assoc.</div>
+            <div style="font-size:13px;color:#94a3b8;">Prise de rendez-vous en ligne</div>
+            <div style="margin-top:20px;"><div style="background:rgba(56,189,248,0.1);border:1px solid rgba(56,189,248,0.2);padding:6px 14px;border-radius:8px;font-size:12px;color:#38bdf8;display:inline-block;">-40% appels téléphoniques</div></div>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-tag">Site vitrine</span>
+            <h3>Cabinet Médical</h3>
+            <p>Médecins généralistes — Romont</p>
+          </div>
+        </div>
+      </article>
+      <article class="portfolio-item reveal reveal-delay-3" tabindex="0">
+        <div class="portfolio-mock" style="background:linear-gradient(135deg,#0a0f0a,#1a2f1a,#0a0f0a);min-height:260px;">
+          <div style="text-align:center;padding:32px;">
+            <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#4ade80;margin-bottom:12px;">GARAGE AUTOMOBILE</div>
+            <div style="font-size:24px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Garage Morand</div>
+            <div style="font-size:13px;color:#94a3b8;">Site vitrine + Catalogue véhicules</div>
+            <div style="margin-top:20px;"><div style="background:rgba(74,222,128,0.1);border:1px solid rgba(74,222,128,0.2);padding:6px 14px;border-radius:8px;font-size:12px;color:#4ade80;display:inline-block;">+3x contacts qualifiés</div></div>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-tag">Site vitrine</span>
+            <h3>Garage Morand</h3>
+            <p>Automobiles — Payerne</p>
+          </div>
+        </div>
+      </article>
+      <article class="portfolio-item reveal reveal-delay-4" tabindex="0">
+        <div class="portfolio-mock" style="background:linear-gradient(135deg,#1a1000,#332000,#1a1000);min-height:260px;">
+          <div style="text-align:center;padding:32px;">
+            <div style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fbbf24;margin-bottom:12px;">FIDUCIAIRE</div>
+            <div style="font-size:26px;font-weight:900;letter-spacing:-0.5px;margin-bottom:8px;">Châtel &amp; Partners</div>
+            <div style="font-size:13px;color:#94a3b8;">Site institutionnel + Espace client</div>
+            <div style="margin-top:20px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+              <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2);padding:6px 14px;border-radius:8px;font-size:12px;color:#fbbf24;">+55% visibilité</div>
+              <div style="background:rgba(251,191,36,0.1);border:1px solid rgba(251,191,36,0.2);padding:6px 14px;border-radius:8px;font-size:12px;color:#fbbf24;">PageSpeed 98</div>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-overlay">
+          <div class="portfolio-info">
+            <span class="portfolio-tag">Site institutionnel</span>
+            <h3>Châtel &amp; Partners</h3>
+            <p>Fiduciaire — Fribourg</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 64px;">
+      <span class="section-label">Témoignages</span>
+      <h2 class="section-title" id="testimonials-title">Ce qu'en disent<br/>nos clients</h2>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars" aria-label="5 étoiles">
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="testimonial-quote">"Depuis la refonte de notre site, les demandes de contact ont triplé. NEXA a parfaitement compris notre image et notre clientèle locale. Un travail sérieux et un suivi irréprochable."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">PM</div>
+          <div>
+            <div class="author-name">Pierre Morand</div>
+            <div class="author-role">Directeur — Garage Morand, Payerne</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars" aria-label="5 étoiles">
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="testimonial-quote">"Notre boutique en ligne tourne depuis 6 mois. Le chiffre d'affaires online représente déjà 30% de notre total. L'investissement a été rentabilisé en 2 mois. Je recommande sans hésitation."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">SB</div>
+          <div>
+            <div class="author-name">Sophie Berset</div>
+            <div class="author-role">Propriétaire — La Farine d'Or, Estavayer</div>
+          </div>
+        </div>
+      </article>
+      <article class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-stars" aria-label="5 étoiles">
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="star" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="testimonial-quote">"Réactif, professionnel et à l'écoute. NEXA a livré notre site en 3 semaines, exactement comme convenu. Nos patients trouvent facilement nos horaires et peuvent réserver en ligne."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">AB</div>
+          <div>
+            <div class="author-name">Dr. Anne Blanc</div>
+            <div class="author-role">Médecin — Cabinet Médical, Romont</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" aria-labelledby="pricing-title">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 64px;">
+      <span class="section-label">Tarifs</span>
+      <h2 class="section-title" id="pricing-title">Des prix transparents,<br/>sans surprise</h2>
+      <p class="section-sub" style="margin:0 auto;">Tous les projets incluent hébergement 1 an, formation, et support 3 mois. Prix en CHF.</p>
+    </div>
+    <div class="pricing-grid">
+      <article class="pricing-card reveal reveal-delay-1">
+        <p class="pricing-plan">Essentiel</p>
+        <div class="pricing-price">990 <span>CHF</span></div>
+        <p class="pricing-desc">Idéal pour se lancer avec une présence en ligne soignée.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Site 1–5 pages</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Design responsive mobile</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Formulaire de contact</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>SEO de base</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Hébergement 1 an inclus</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-outline">Commencer</a>
+      </article>
+      <article class="pricing-card featured reveal reveal-delay-2">
+        <div class="pricing-badge">Populaire</div>
+        <p class="pricing-plan">Professionnel</p>
+        <div class="pricing-price">1'990 <span>CHF</span></div>
+        <p class="pricing-desc">Pour les entreprises qui veulent convertir et se démarquer.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Site jusqu'à 10 pages</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Design premium sur mesure</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Animations &amp; interactions</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>SEO avancé + Analytics</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Prise de RDV en ligne</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Support 3 mois inclus</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-filled">Commencer</a>
+      </article>
+      <article class="pricing-card reveal reveal-delay-3">
+        <p class="pricing-plan">E-commerce</p>
+        <div class="pricing-price">3'490 <span>CHF</span></div>
+        <p class="pricing-desc">Boutique en ligne complète pour vendre 24h/24.</p>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Boutique produits illimitée</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Paiement Stripe / Twint</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Gestion des stocks</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Emails automatiques</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Formation complète</li>
+          <li><span class="feat-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span>Support prioritaire 6 mois</li>
+        </ul>
+        <a href="#contact" class="btn-plan btn-plan-outline">Commencer</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section id="cta-banner" aria-label="Appel à l'action">
+  <div class="container">
+    <div class="cta-inner">
+      <h2 class="cta-title reveal">Prêt à donner à votre entreprise la <span class="highlight">vitrine qu'elle mérite ?</span></h2>
+      <div class="reveal reveal-delay-2">
+        <a href="#contact" class="btn-primary" style="font-size:16px;padding:16px 32px;">
+          Consultation gratuite
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" aria-labelledby="contact-title">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="section-label">Contact</span>
+        <h2 class="contact-h2" id="contact-title">Parlons de<br/>votre projet</h2>
+        <p class="contact-desc">Un échange de 30 minutes suffit pour comprendre vos besoins et vous proposer une solution adaptée. Pas d'engagement, pas de jargon.</p>
+        <div class="contact-detail">
+          <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.81 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16z"/></svg></div>
+          <div><div class="detail-label">Téléphone</div><div class="detail-value">+41 XX XXX XX XX</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="detail-label">Email</div><div class="detail-value">contact@nexa-web.ch</div></div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="detail-label">Région</div><div class="detail-value">Broye &amp; Fribourg, Suisse</div></div>
+        </div>
+      </div>
+      <form class="contact-form reveal reveal-delay-2" onsubmit="handleSubmit(event)" novalidate aria-label="Formulaire de contact">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname" class="form-label">Prénom</label>
+            <input id="fname" name="fname" type="text" class="form-input" placeholder="Jean" autocomplete="given-name" required/>
+          </div>
+          <div class="form-group">
+            <label for="lname" class="form-label">Nom</label>
+            <input id="lname" name="lname" type="text" class="form-input" placeholder="Dupont" autocomplete="family-name" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input id="email" name="email" type="email" class="form-input" placeholder="jean@exemple.ch" autocomplete="email" required/>
+        </div>
+        <div class="form-group">
+          <label for="service" class="form-label">Service souhaité</label>
+          <select id="service" name="service" class="form-select form-input" required>
+            <option value="" disabled selected>Choisissez un service</option>
+            <option value="creation">Création de site web</option>
+            <option value="refonte">Refonte de site existant</option>
+            <option value="ecommerce">Boutique en ligne</option>
+            <option value="seo">Référencement SEO</option>
+            <option value="autre">Autre / Je ne sais pas encore</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message" class="form-label">Votre projet</label>
+          <textarea id="message" name="message" class="form-textarea" placeholder="Décrivez votre activité et ce que vous souhaitez réaliser..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Envoyer ma demande
+        </button>
+        <p id="form-msg" role="status" aria-live="polite" style="display:none;margin-top:12px;font-size:14px;"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <span class="nav-logo">NEXA</span>
+        <p class="footer-brand-desc">Agence web spécialisée pour les entreprises et indépendants de la Broye et de Fribourg. Des sites qui travaillent pour vous.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Création de site</a></li>
+          <li><a href="#services">Refonte</a></li>
+          <li><a href="#services">E-commerce</a></li>
+          <li><a href="#services">SEO</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Agence</h4>
+        <ul>
+          <li><a href="#process">Notre processus</a></li>
+          <li><a href="#portfolio">Réalisations</a></li>
+          <li><a href="#testimonials">Témoignages</a></li>
+          <li><a href="#pricing">Tarifs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#contact">Devis gratuit</a></li>
+          <li><a href="mailto:contact@nexa-web.ch">contact@nexa-web.ch</a></li>
+          <li><a href="tel:+41XXXXXXXXX">+41 XX XXX XX XX</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 NEXA — Agence Web Broye &amp; Fribourg</span>
+      <span>Fait en Suisse avec soin</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // CANVAS PARTICLES
+  const canvas = document.getElementById('bg-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], animId;
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+
+  class Particle {
+    constructor() { this.reset(true); }
+    reset(init) {
+      this.x = init ? Math.random() * W : (Math.random() > 0.5 ? 0 : W);
+      this.y = init ? Math.random() * H : Math.random() * H;
+      this.r = Math.random() * 1.4 + 0.3;
+      this.vx = (Math.random() - 0.5) * 0.35;
+      this.vy = (Math.random() - 0.5) * 0.35;
+      this.alpha = Math.random() * 0.45 + 0.08;
+      this.hue = Math.random() > 0.5 ? '99,102,241' : '129,140,248';
+    }
+    update() {
+      this.x += this.vx; this.y += this.vy;
+      if (this.x < -10 || this.x > W + 10 || this.y < -10 || this.y > H + 10) this.reset(false);
+    }
+    draw() {
+      ctx.beginPath(); ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${this.hue},${this.alpha})`; ctx.fill();
+    }
+  }
+
+  function initParticles() {
+    particles = [];
+    const n = Math.min(Math.floor((W * H) / 9000), 140);
+    for (let i = 0; i < n; i++) particles.push(new Particle());
+  }
+
+  function drawLines() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x, dy = particles[i].y - particles[j].y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 110) {
+          ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(99,102,241,${0.05*(1-d/110)})`; ctx.lineWidth = 0.5; ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+    drawLines();
+    animId = requestAnimationFrame(animate);
+  }
+
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    resize(); initParticles(); animate();
+    window.addEventListener('resize', () => { resize(); initParticles(); }, { passive: true });
+  }
+
+  // NAVBAR
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', scrollY > 60), { passive: true });
+
+  // MOBILE MENU
+  function openMobileMenu() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  // SCROLL REVEAL
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // COUNTERS
+  function animCount(el, target) {
+    const dur = 1800, start = performance.now();
+    const step = now => {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target);
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+  const cObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const t = parseInt(e.target.dataset.target);
+        if (!isNaN(t)) animCount(e.target, t);
+        cObs.unobserve(e.target);
+      }
     });
-    document.addEventListener("DOMContentLoaded", function () {
-      lottie.loadAnimation({
-        container: document.getElementById('lottie-header'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: 'animations/paint-wall.json'
-      });
-    });
-  </script>
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => cObs.observe(el));
+
+  // FORM
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    const msg = document.getElementById('form-msg');
+    btn.disabled = true; btn.textContent = 'Envoi en cours…';
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Message envoyé !`;
+      btn.style.background = '#16a34a';
+      msg.style.display = 'block'; msg.style.color = '#4ade80';
+      msg.textContent = 'Merci ! Je vous contacte dans les 48 heures.';
+      e.target.reset();
+      setTimeout(() => {
+        btn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer ma demande`;
+        btn.style.background = ''; msg.style.display = 'none';
+      }, 5000);
+    }, 1200);
+  }
+</script>
 </body>
 </html>
